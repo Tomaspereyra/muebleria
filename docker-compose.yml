@@ -1,0 +1,72 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: Ecommerce-Back
+    ports:
+      - "8080:8080"
+    networks:
+      - mynetwork
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    depends_on:
+      mysql:
+          condition: service_healthy  # Espera a que MySQL esté "healthy"   
+  frontend:
+    build:
+      context: ./Ecommerce-Front/ecommerce
+    ports:
+      - "3000:3000"
+    networks:
+      - mynetwork
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"  # Mapea el puerto 80 del host al puerto 80 de Nginx
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf  # Monta el archivo de configuración de Nginx
+      - /etc/letsencrypt/live:/etc/letsencrypt/live:ro
+      - /etc/letsencrypt/archive:/etc/letsencrypt/archive:ro
+      - /etc/letsencrypt/renewal:/etc/letsencrypt/renewal:ro
+    networks:
+      - mynetwork
+  minio:
+    image: quay.io/minio/minio
+    ports:
+      - "9000:9000"  # Puerto para el servicio MinIO
+      - "9001:9001"  # Puerto para la consola de administración de MinIO
+    volumes:
+      - ~/minio/data:/data  # Monta un volumen para persistencia de datos
+    environment:
+      - MINIO_ROOT_USER=webapp  # Cambia ROOTNAME por tu nombre de usuario deseado
+      - MINIO_ROOT_PASSWORD=webapp1234  # Cambia CHANGEME123 por tu contraseña deseada
+    networks:
+      - mynetwork
+    command: server /data --console-address ":9001"  # Comando para iniciar MinIO
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3306:3306"  # Exponer el puerto 3306 para MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: kjhsdf86wgd!  # Cambia 'rootpassword' a una contraseña segura
+      MYSQL_DATABASE: ecommerce  # Nombre de la base de datos que deseas crear
+      MYSQL_USER: ecommerce_user  # Usuario de la base de datos
+      MYSQL_PASSWORD: kjhsdf86wgd!  # Contraseña del usuario
+    volumes:
+      - mysql_data:/var/lib/mysql  # Volumen para persistencia de datos de MySQL
+    networks:
+      - mynetwork
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s       # Intervalo entre intentos
+      timeout: 5s         # Tiempo de espera antes de fallar
+      retries: 5          # Número de intentos        
+networks:
+  mynetwork:
+    driver: bridge
+    
+volumes:
+  mysql_data:
