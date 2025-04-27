@@ -115,7 +115,7 @@ const Header = () => {
 
                                 <li className="nav-item">
                                     <a
-                                        href="https://wa.me/5491134230274"
+                                        href="https://wa.me/5495491127441710"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="nav-link"
