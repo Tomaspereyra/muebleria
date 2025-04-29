@@ -57,14 +57,14 @@ const Header = () => {
                         <a className="navbar-brand d-flex align-items-center" href="/">
 
                             <img
-                                src="electrosha-logo.png"  // Logo para pantallas grandes
+                                src="logo-muebleria.png"  // Logo para pantallas grandes
                                 alt="Logo grande"
                                 className="d-none d-lg-block "  // Ocultar en pantallas pequeñas
                                 style={{ width: '120px', height: '120px' }}
                             />
 
                             <img
-                                src="electrosha-logo.png"  // Logo para pantallas pequeñas
+                                src="logo-muebleria.png"  // Logo para pantallas pequeñas
                                 alt="Logo Pequeño"
                                 className="d-block d-lg-none"  // Mostrar en pantallas pequeñas
                                 style={{ width: '120px', height: '120px' }}

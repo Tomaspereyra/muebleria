@@ -55,7 +55,7 @@ public class ImageServiceImpl implements IImageService {
             URI originalUri = new URI(originalUrl);
 
             // Crear una nueva URI con el dominio deseado
-            String newHost = "electrosha20.com.ar";
+            String newHost = "debuenamaderamuebleria.com.ar";
             URI transformedUri = new URI(
                     "https",                     // Esquema (https)
                     originalUri.getUserInfo(),   // Información del usuario (normalmente null)

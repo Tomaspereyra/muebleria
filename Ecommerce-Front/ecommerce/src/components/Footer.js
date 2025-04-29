@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <footer className="bg-light text-center text-lg-start mt-auto footer">
             <div className="text-center p-4">
-                <span className="text-muted">&copy; {new Date().getFullYear()} ElectroSHA. Todos los derechos reservados.</span>
+                <span className="text-muted">&copy; {new Date().getFullYear()} DeBuenaMadera Muebleria. Todos los derechos reservados.</span>
                {/*<br />
                 <a href="/privacy" className="text-muted footer-link">Política de privacidad</a> | 
                 <a href="/terms" className="text-muted footer-link"> Términos de servicio</a>
