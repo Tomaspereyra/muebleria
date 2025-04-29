@@ -37,8 +37,8 @@ public class AuthServiceImpl implements IAuthServices {
     public void createAdminAccount(){
         User user = new User();
         user.setFirstName("admin");
-        user.setEmail("matias.cimino98@gmail.com");
-        user.setPassword(new BCryptPasswordEncoder().encode("Electrosha948!"));
+        user.setEmail("Debuenamadera.ig@gmail.com ");
+        user.setPassword(new BCryptPasswordEncoder().encode("Debuenamadera948!"));
         user.setRol(UserRol.ADMIN);
         userSQLRepository.save(user);
 
